@@ -19,7 +19,7 @@ EOF;
 	
 	// 	return array ( array(id, 物品名称, ...), array(111, car,...)  ...);
 	static public function getList($categoryId) {
-		$categoryId = sqlite_escape_string($categoryId);
+		// $categoryId = sqlite_escape_string($categoryId);
 		$ans = array();
 		$field = array_merge(array("id"), MyDB::getFields($categoryId));
 		$ans []= $field;
@@ -34,7 +34,7 @@ EOF;
 			for ($i = 0; $i < field_len; $i ++) {
 				$line []= $row[$i];
 			}
-			$ans []= $row[];
+			$ans []= $line;
 		}
 		$db->close();
 		return $ans;
@@ -47,15 +47,15 @@ EOF;
 		$ret = $db->query($sql);
 		$row = $ret->fetchArray(SQLITE3_ASSOC);
 		$field = $row['fields'];
-		$field = explode('/', $field);
+		$field = explode(',', $field);
 		$db->close();
 		return $field;
 	}
 
 	// 	return array (key => value);
 	public static function getAd($categoryId, $adId) {
-		$categoryId = sqlite_escape_string($categoryId);
-		$adId = sqlite_escape_string($adId);
+		//$categoryId = sqlite_escape_string($categoryId);
+		//$adId = sqlite_escape_string($adId);
 		$db = new SQLite3("category.sqlite");
 		$table = "category_" . $categoryId;
 		$sql = "SELECT * FROM {$table} WHERE id = {$adId}";
@@ -67,13 +67,14 @@ EOF;
 	
 	public static function addAd($AdInfo) {
 		$categoryId = $AdInfo['id'];
-		$categoryId = sqlite_escape_string($categoryId);
+		//$categoryId = sqlite_escape_string($categoryId);
 		$table = "category_" . $categoryId;
 		$field = MyDB::getFields($categoryId);
 		$sql = "INSERT INTO {$table} VALUES (";
-		$sql .= "'" . sqlite_escape_string($AdInfo[$field[0]]) . "'";
+		//$sql .= "'" . sqlite_escape_string($AdInfo[$field[0]]) . "'";
 		for ($i = 1, $j = count($field); $i < $j; $i ++)
-			$sql .= ",'" . sqlite_escape_string($AdInfo[$field[$i]]) . "'";
+			//$sql .= ",'" . sqlite_escape_string($AdInfo[$field[$i]]) . "'";
+			$sql .= ",'" . $AdInfo[$field[$i]] . "'";
 		$sql .= ");";
 		$db->exec($sql);
 		$db->close();
@@ -95,3 +96,4 @@ EOF;
 }
 
 // header("Content-Type: text/html; charset=utf-8");
+// var_dump(MyDB::getList("fushi"));

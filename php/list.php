@@ -1,24 +1,26 @@
+<html>
+<link rel="stylesheet" href="/css/buttons.css">
 <?php
 	require "MyDB.php";
 	header("Content-Type: text/html; charset=utf-8");
 	$categoryId = $_GET['category'];
 	$listArray = MyDB::getList($categoryId);
-	// $listArray = array(	array("id", "标题","内容","价格","QQ"), 
-	// 					array("1","NokiaXXX跳楼价","X成新，水货，欲购从速","1200","129078923"),
-	// 					array("2","三星S40","可当盾牌！","2345","123353421"),
-	// 					array("3","苹果20S出售","全新港行，提供担保，欲购从速","5432","123537624"),
-	// 					array("4","兜售小米6","balabalbalabala","7832","136576542"));
-	echo $categoryId;
-	echo "分类列表：<br>";
-	echo "<table border='1'>";
+	echo "<h2 style=\"text-align:center\">分类列表：</h2>";
 
+	echo "<div align=\"center\">";
+	echo "<link rel=\"stylesheet\" href=\"css/buttons.css\">";
+	echo ("<form name=\"input\" action=\"post.php?categoryId={$categoryId}}\" method=\"post\">");
+	echo ("<input type=\"submit\" value=\"发布新信息\" class=\"button button-flat-primary\" style=\"color:white\">");
+	echo ("</form>");
+	echo "</div>";
+
+	echo "<table align=\"center\">";
 	$arrayTitle = $listArray[0];
-
 	// 输出标题
 	echo "<tr>";
-	for ($i = 0 ; $i < 5 && $i < count($arrayTitle); $i++ )
+	for ($i = 0, $j = count($arrayTitle); $i < 5 && $i < $j; $i++)
 	{ 
-		printf("<td>%s</td>",$arrayTitle[$i]);
+		printf("<th>%s</th>",$arrayTitle[$i]);
 	}
 	echo "</tr>";	
 
@@ -42,7 +44,5 @@
 		echo "</tr>";	
 	}
 	echo "</table>";
-	printf("<form name=\"input\" action=\"post.php?categoryId=%s\" method=\"post\">",$categoryId);
-	printf("<input type=\"submit\" value=\"发布新信息\">");
-	printf("</form>")
 ?>
+</html>

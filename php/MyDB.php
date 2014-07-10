@@ -18,7 +18,7 @@ EOF;
 	}
 	
 	static public function getList($categoryId) {
-		// $categoryId = sqlite_escape_string($categoryId);
+		$categoryId = SQLite3::escapeString($categoryId);
 		$ans = array();
 		$field = array_merge(array("id"), MyDB::getFields($categoryId));
 		$ans []= $field;
@@ -51,8 +51,8 @@ EOF;
 	}
 
 	public static function getAd($categoryId, $adId) {
-		//$categoryId = sqlite_escape_string($categoryId);
-		//$adId = sqlite_escape_string($adId);
+		$categoryId = SQLite3::escapeString($categoryId);
+		$adId = SQLite3::escapeString($adId);
 		$table = "category_" . $categoryId;
 		$sql = "SELECT * FROM {$table} WHERE id = {$adId}";
 		$db = new SQLite3("category.sqlite");
@@ -64,19 +64,19 @@ EOF;
 	
 	public static function addAd($AdInfo) {
 		$categoryId = $AdInfo['id'];
-		//$categoryId = sqlite_escape_string($categoryId);
+		$categoryId = SQLite3::escapeString($categoryId);
 		$table = "category_" . $categoryId;
 		$field = MyDB::getFields($categoryId);
 		$i = 1;
 		$j = count($field);
 		$sql = "INSERT INTO {$table} (";
-		$sql .= "'" . $field[0] . "'";
+		$sql .= "'" . SQLite3::escapeString($field[0]) . "'";
 		for ($i = 1; $i < $j; $i ++)
-			$sql .= ",'" . $field[$i] . "'";
+			$sql .= ",'" . SQLite3::escapeString($field[$i]) . "'";
 		$sql .= ") VALUES (";
-		$sql .= "'" . $AdInfo[$field[0]] . "'";
+		$sql .= "'" . SQLite3::escapeString($AdInfo[$field[0]]) . "'";
 		for ($i = 1; $i < $j; $i ++)
-			$sql .= ",'" . $AdInfo[$field[$i]] . "'";
+			$sql .= ",'" . SQLite3::escapeString($AdInfo[$field[$i]]) . "'";
 		$sql .= ");";
 		$db = new SQLite3("category.sqlite");
 		$db->exec($sql);
@@ -97,6 +97,3 @@ EOF;
 		$db->close();
 	}
 }
-
-// header("Content-Type: text/html; charset=utf-8");
-// var_dump(MyDB::getList("fushi"));

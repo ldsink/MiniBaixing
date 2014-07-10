@@ -34,7 +34,7 @@ EOF;
 			for ($i = 0; $i < field_len; $i ++) {
 				$line []= $row[$i];
 			}
-			$ans [] = $row[];
+			$ans []= $row[];
 		}
 		$db->close();
 		return $ans;
@@ -60,7 +60,7 @@ EOF;
 		$table = "category_" . $categoryId;
 		$sql = "SELECT * FROM {$table} WHERE id = {$adId}";
 		$ret = $db->query($sql);
-		$ans = $ret->fetchArray(SQLITE3_ASSOC)
+		$ans = $ret->fetchArray(SQLITE3_ASSOC);
 		$db->close();
 		return $ans;
 	}
@@ -94,11 +94,4 @@ EOF;
 	}
 }
 
-header("Content-Type: text/html; charset=utf-8");
-MyDB::initCategory("fushi");
-//var_dump(MyDB::getCategory());
-// $a = array("a", "b");
-// $b = array("c");
-// $c = array("d", "e");
-// $a = $a + $b;
-// var_dump(array_merge($a, $b));
+// header("Content-Type: text/html; charset=utf-8");

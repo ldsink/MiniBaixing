@@ -7,7 +7,6 @@
 
 	$adAttr = MyDB::getFields($categoryId);
 	//$adAttr = array("标题","内容","价格","QQ");
-
 	printf("<form name=\"input\" action=\"sendpost.php?categoryId=%s\" method=\"post\">",$categoryId);
 	foreach ($adAttr as $key => $value){
 		echo "$value:<br>";

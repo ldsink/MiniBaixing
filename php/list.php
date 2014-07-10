@@ -9,7 +9,7 @@
 
 	echo "<div align=\"center\">";
 	echo "<link rel=\"stylesheet\" href=\"css/buttons.css\">";
-	echo ("<form name=\"input\" action=\"post.php?categoryId={$categoryId}}\" method=\"post\">");
+	echo ("<form name=\"input\" action=\"post.php?categoryId={$categoryId}\" method=\"post\">");
 	echo ("<input type=\"submit\" value=\"发布新信息\" class=\"button button-flat-primary\" style=\"color:white\">");
 	echo ("</form>");
 	echo "</div>";
@@ -25,12 +25,12 @@
 	echo "</tr>";	
 
 	// 输出每一项
-	for ($j = 1 ; $j < count($listArray); $j++ )
+	for ($j = 1 ,$ii = count($listArray); $j < $ii; $j++ )
 	{
 		$arrayItem = $listArray[$j];
 		echo "<tr>";
 		$infoId = $arrayItem[0];
-		for ($i = 0 ; $i < 5 && $i < count($arrayItem); $i++ )
+		for ($i = 0 , $iii = count($arrayItem) ; $i < 5 && $i < $iii ; $i++ )
 		{ 
 			echo "<td>";
 			if($i == 1)

@@ -1,16 +1,16 @@
 ﻿class MyDB {
-	static public getCategory();
+	static public function getCategory()
 		return array (english => chinese);
 	
-	static getList( categoryId )
+	static public function getList($categoryId)
 		return array ( array(id, 物品名称, ...), array(111, car,...)  ...);
 		
-	static getAdAttribute(categoryId)
+	public static function getFields($categoryId)
 		return array (para1, para2, ...);
 	
-	static getAd( categoryId ,AdId )
+	public static function getAd($categoryId, $adId)
 		return array (key => value);
 		
-	static addAd( Array(id => categoryId, paraName => paraValue))
+	public static function addAd( Array(id => categoryId, paraName => paraValue))
 		return 0, 1;
 }

@@ -31,8 +31,8 @@ EOF;
 		$field_len = count($field);
 		while($row = $ret->fetchArray(SQLITE3_ASSOC)) {
 			$line = array();
-			for ($i = 0; $i < field_len; $i ++) {
-				$line []= $row[$i];
+			for ($i = 0; $i < $field_len; $i ++) {
+				$line []= $row[$field[$i]];
 			}
 			$ans []= $line;
 		}
@@ -67,15 +67,19 @@ EOF;
 	
 	public static function addAd($AdInfo) {
 		$categoryId = $AdInfo['id'];
+		$db = new SQLite3("category.sqlite");
 		//$categoryId = sqlite_escape_string($categoryId);
 		$table = "category_" . $categoryId;
 		$field = MyDB::getFields($categoryId);
 		$sql = "INSERT INTO {$table} VALUES (";
 		//$sql .= "'" . sqlite_escape_string($AdInfo[$field[0]]) . "'";
+		$sql .= "0,'" . $AdInfo[$field[0]] . "'";
+		
 		for ($i = 1, $j = count($field); $i < $j; $i ++)
 			//$sql .= ",'" . sqlite_escape_string($AdInfo[$field[$i]]) . "'";
 			$sql .= ",'" . $AdInfo[$field[$i]] . "'";
 		$sql .= ");";
+		echo "$sql";
 		$db->exec($sql);
 		$db->close();
 	}

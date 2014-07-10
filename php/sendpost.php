@@ -1,30 +1,30 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title></title>
 </head>
 <body>
 	<?php
+		require "MyDB.php";
 		header("Content-Type: text/html; charset=utf-8");
 
 		$categoryId = $_GET['categoryId'];
-		// $adAttr = getFields($categoryId);
-		$adAttr = array("标题","内容","价格","QQ");
+		$adAttr = MyDB::getFields($categoryId);
 		$addAd = array();
 
 		$addAd['id'] = $categoryId;
 		foreach ($adAttr as $key => $value){
 			$addAd[$value] = $_POST[$value];
 		}
-		print_r($addAd);
-		// addAd($addAd);
-		exit;
+		//print_r($addAd);
+		MyDB::addAd($addAd);
+		printf("<br>");
+		printf("<a href=\"list.php?category=%s\">返回</a>" ,$categoryId);
+		$url = "list.php?category=";
+		$url .= $categoryId; 
+		echo "<script language='javascript' type='text/javascript'>"; 
+		echo "window.location.href='$url'"; 
+		echo "</script>"; 
 	?>
 </body>
 </html>
-<?php 
-$url = "index.php"; 
-echo "<script language='javascript' type='text/javascript'>"; 
-echo "window.location.href='$url'"; 
-echo "</script>"; 
-?>

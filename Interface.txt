@@ -1,0 +1,16 @@
+class MyDB {
+	static public getCategory();
+		return array (english => chinese);
+	
+	static getList( categoryId )
+		return array ( array(id, 物品名称, ...), array(111, car,...)  ...);
+		
+	static getAdAttribute(categoryId)
+		return array (para1, para2, ...);
+	
+	static getAd( AdId )
+		return array (key => value);
+		
+	static addAd( Array(id => categoryId, paraName => paraValue))
+		return 0, 1;
+}

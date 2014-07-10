@@ -1,4 +1,4 @@
-class MyDB {
+﻿class MyDB {
 	static public getCategory();
 		return array (english => chinese);
 	
@@ -8,7 +8,7 @@ class MyDB {
 	static getAdAttribute(categoryId)
 		return array (para1, para2, ...);
 	
-	static getAd( AdId )
+	static getAd( categoryId ,AdId )
 		return array (key => value);
 		
 	static addAd( Array(id => categoryId, paraName => paraValue))

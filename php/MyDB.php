@@ -17,7 +17,6 @@ EOF;
 		return $ans;
 	}
 	
-	// 	return array ( array(id, 物品名称, ...), array(111, car,...)  ...);
 	static public function getList($categoryId) {
 		// $categoryId = sqlite_escape_string($categoryId);
 		$ans = array();
@@ -40,7 +39,6 @@ EOF;
 		return $ans;
 	}
 
-	// 	return array (para1, para2, ...);
 	public static function getFields($categoryId) {
 		$db = new SQLite3("category.sqlite");
 		$sql = "SELECT * FROM category WHERE englishName = '{$categoryId}';";
@@ -52,13 +50,12 @@ EOF;
 		return $field;
 	}
 
-	// 	return array (key => value);
 	public static function getAd($categoryId, $adId) {
 		//$categoryId = sqlite_escape_string($categoryId);
 		//$adId = sqlite_escape_string($adId);
-		$db = new SQLite3("category.sqlite");
 		$table = "category_" . $categoryId;
 		$sql = "SELECT * FROM {$table} WHERE id = {$adId}";
+		$db = new SQLite3("category.sqlite");
 		$ret = $db->query($sql);
 		$ans = $ret->fetchArray(SQLITE3_ASSOC);
 		$db->close();
@@ -76,6 +73,7 @@ EOF;
 			//$sql .= ",'" . sqlite_escape_string($AdInfo[$field[$i]]) . "'";
 			$sql .= ",'" . $AdInfo[$field[$i]] . "'";
 		$sql .= ");";
+		$db = new SQLite3("category.sqlite");
 		$db->exec($sql);
 		$db->close();
 	}
@@ -83,13 +81,13 @@ EOF;
 	private static function initCategory($categoryId) {
 		$field = MyDB::getFields($categoryId);
 		$table = "category_" . $categoryId;
-		$db = new SQLite3("category.sqlite");
 		$sql = "CREATE TABLE IF NOT EXISTS '{$table}' 
 			('id' INTEGER PRIMARY KEY AUTOINCREMENT";
 		foreach ($field as $name) {
 			$sql .= ",{$name} varchar(255) NOT NULL";
 		}
 		$sql .= ");";
+		$db = new SQLite3("category.sqlite");
 		$db->exec($sql);
 		$db->close();
 	}

@@ -67,12 +67,15 @@ EOF;
 		//$categoryId = sqlite_escape_string($categoryId);
 		$table = "category_" . $categoryId;
 		$field = MyDB::getFields($categoryId);
-		$sql = "INSERT INTO {$table} VALUES (";
-		//$sql .= "'" . sqlite_escape_string($AdInfo[$field[0]]) . "'";
-		$sql .= "0,'" . $AdInfo[$field[0]] . "'";
-		
-		for ($i = 1, $j = count($field); $i < $j; $i ++)
-			//$sql .= ",'" . sqlite_escape_string($AdInfo[$field[$i]]) . "'";
+		$i = 1;
+		$j = count($field);
+		$sql = "INSERT INTO {$table} (";
+		$sql .= "'" . $field[0] . "'";
+		for ($i = 1; $i < $j; $i ++)
+			$sql .= ",'" . $field[$i] . "'";
+		$sql .= ") VALUES (";
+		$sql .= "'" . $AdInfo[$field[0]] . "'";
+		for ($i = 1; $i < $j; $i ++)
 			$sql .= ",'" . $AdInfo[$field[$i]] . "'";
 		$sql .= ");";
 		$db = new SQLite3("category.sqlite");

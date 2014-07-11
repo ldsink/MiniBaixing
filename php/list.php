@@ -5,16 +5,17 @@
 	header("Content-Type: text/html; charset=utf-8");
 	$categoryId = $_GET['category'];
 	$listArray = MyDB::getList($categoryId);
-	echo "<h2 style=\"text-align:center\">分类列表：</h2>";
+	echo "<a href='index.php'><img src='img/logo.png'/></a><br>";
+	echo "<h2>分类列表：</h2>";
 
-	echo "<div align=\"center\">";
+	echo "<div>";
 	echo "<link rel=\"stylesheet\" href=\"css/buttons.css\">";
 	echo ("<form name=\"input\" action=\"post.php?categoryId={$categoryId}\" method=\"post\">");
 	echo ("<input type=\"submit\" value=\"发布新信息\" class=\"button button-flat-primary\" style=\"color:white\">");
 	echo ("</form>");
 	echo "</div>";
 
-	echo "<table align=\"center\">";
+	echo "<table>";
 	$arrayTitle = $listArray[0];
 	// 输出标题
 	echo "<tr>";
